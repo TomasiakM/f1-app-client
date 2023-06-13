@@ -1,3 +1,14 @@
 export default defineNuxtConfig({
-  devtools: { enabled: true }
+  devtools: { 
+    enabled: true
+  },
+  postcss: {
+      plugins: {
+        tailwindcss: {},
+        autoprefixer: {},
+      },
+  },
+  css: [
+    '@/assets/main.css',
+  ],
 })
