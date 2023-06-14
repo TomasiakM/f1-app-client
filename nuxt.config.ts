@@ -1,4 +1,9 @@
 export default defineNuxtConfig({
+  runtimeConfig:{
+    public:{
+      brand: "brand_name"
+    }
+  },
   devtools: { 
     enabled: true
   },
