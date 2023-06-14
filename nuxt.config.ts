@@ -1,4 +1,7 @@
 export default defineNuxtConfig({
+  modules: [
+    '@pinia/nuxt',
+  ],
   runtimeConfig:{
     public:{
       brand: "brand_name"
