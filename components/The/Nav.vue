@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute top-0 left-0 w-full bg-card border-b border-b-gray p-2">
+  <div class="sticky top-0 left-0 w-full bg-card border-b border-b-gray p-2">
     <div class="container mx-auto">
       <div class="flex items-center justify-between">
         <NuxtLink to="/" class="text-xl font-semibold">
@@ -10,19 +10,34 @@
           <NuxtLink to="/" class="nav-link">Kierowcy</NuxtLink>
           <NuxtLink to="/" class="nav-link">Zespoły</NuxtLink>
           <NuxtLink to="/" class="nav-link">Tory</NuxtLink>
-          <div class="flex items-center gap-1 ml-2">
-            <NuxtLink
-              to="/logowanie"
-              class="nav-button-link bg-primary hover:bg-primary-hover text-white"
-            >
-              Logowanie
-            </NuxtLink>
-            <NuxtLink
-              to="/rejestracja"
-              class="nav-button-link bg-secondary hover:bg-secondary-hover text-white"
-            >
-              Rejestracja
-            </NuxtLink>
+
+          <div class="flex items-center pl-4 border-l border-l-gray">
+            <div v-if="userStore.isAuthorized" class="flex items-center gap-1">
+              <div class="">
+                Witaj,
+                <span class="font-semibold">
+                  {{ userStore.getUser?.username }}
+                </span>
+              </div>
+
+              <button @click="userStore.logout()">
+                <SvgLogout class="!w-5 !h-5" />
+              </button>
+            </div>
+            <div v-else class="flex items-center gap-1">
+              <NuxtLink
+                to="/logowanie"
+                class="nav-button-link bg-primary hover:bg-primary-hover text-white"
+              >
+                Logowanie
+              </NuxtLink>
+              <NuxtLink
+                to="/rejestracja"
+                class="nav-button-link bg-secondary hover:bg-secondary-hover text-white"
+              >
+                Rejestracja
+              </NuxtLink>
+            </div>
           </div>
         </div>
       </div>
@@ -31,7 +46,11 @@
 </template>
 
 <script lang="ts" setup>
+import { useUserStore } from "@/stores/userStore";
+
 const config = useRuntimeConfig();
+const userStore = useUserStore();
+
 const { brand } = config.public;
 </script>
 

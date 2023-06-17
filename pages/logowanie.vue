@@ -35,6 +35,7 @@
 </template>
 
 <script lang="ts" setup>
+import { useUserStore } from "~/stores/userStore";
 definePageMeta({
   layout: "login-register",
 });
@@ -47,8 +48,8 @@ const form = reactive({
   isLoading: false,
   error: "",
   data: {
-    username: "",
-    password: "",
+    username: "Admin",
+    password: "Password",
   },
   validation: {
     username: "",
@@ -56,16 +57,38 @@ const form = reactive({
   },
 });
 
-const onSubmit = () => {
+const api = useApi();
+const onSubmit = async () => {
   form.isLoading = true;
   form.error = "";
 
-  setTimeout(() => {
-    form.isLoading = false;
+  form.validation = {
+    username: "",
+    password: "",
+  };
 
-    form.error = "Coś poszło nie tak...";
-  }, 2000);
-  //router.push("/");
+  const { data, error } = await api.auth.login(form.data);
+
+  form.isLoading = false;
+
+  if (data) {
+    const store = useUserStore();
+
+    store.setUser(data);
+    router.push("/");
+    return;
+  }
+
+  if (error?.status === 401) {
+    form.error = "Błędne dane logowania";
+    return;
+  }
+
+  if (error?.errors) {
+    form.validation = error.errors as any;
+  }
+
+  form.error = error?.details || "";
 };
 
 onBeforeMount(() => {

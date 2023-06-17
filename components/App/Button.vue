@@ -1,6 +1,7 @@
 <template>
   <button
     class="p-1 rounded bg-primary hover:bg-primary-hover transition-colors duration-200 text-white"
+    :disabled="isLoading"
   >
     <div class="flex gap-2 justify-center items-center">
       <SvgLoading v-if="isLoading" />
@@ -12,7 +13,7 @@
 <script lang="ts" setup>
 interface IProps {
   type?: "button" | "submit" | "reset";
-  isLoading: boolean;
+  isLoading?: boolean;
 }
 withDefaults(defineProps<IProps>(), {
   type: "button",
