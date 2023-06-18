@@ -9,6 +9,11 @@ module.exports = {
     "./nuxt.config.{js,ts}",
   ],
   theme: {
+    screens: {
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+    },
     extend: {
       colors: {
         primary: colors.red[600],
@@ -20,6 +25,8 @@ module.exports = {
         background: colors.gray[200],
         gray: colors.gray[400],
         card: colors.gray[100],
+        link: colors.sky[500],
+        "link-hover": colors.sky[600],
       },
     },
   },
