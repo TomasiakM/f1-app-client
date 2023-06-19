@@ -10,6 +10,12 @@
           <NuxtLink to="/" class="nav-link">Kierowcy</NuxtLink>
           <NuxtLink to="/" class="nav-link">Zespoły</NuxtLink>
           <NuxtLink to="/" class="nav-link">Tory</NuxtLink>
+          <NuxtLink
+            v-if="userStore.user?.isAdmin"
+            to="/panel"
+            class="bg-primary hover:bg-primary-hover text-white duration-200 transition-colors rounded px-2"
+            >Panel</NuxtLink
+          >
 
           <div class="flex items-center pl-4 border-l border-l-gray">
             <div v-if="userStore.isAuthorized" class="flex items-center gap-1">

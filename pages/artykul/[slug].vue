@@ -19,9 +19,8 @@
       </div>
 
       <h2 class="text-2xl font-semibold">{{ data.title }}</h2>
-      <span class="text-xs text-secondary line-clamp-1">
-        {{ useDate(data.publishedAt) }}
-      </span>
+
+      <AppDisplayDate :date="data.publishedAt" />
     </div>
 
     <div v-html="data.descriptionHtml" class="mt-4" />

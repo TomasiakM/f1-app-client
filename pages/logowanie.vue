@@ -88,7 +88,7 @@ const onSubmit = async () => {
     form.validation = error.errors as any;
   }
 
-  form.error = error?.details || "";
+  form.error = error?.detail || "";
 };
 
 onBeforeMount(() => {

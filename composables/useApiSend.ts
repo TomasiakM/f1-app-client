@@ -2,7 +2,7 @@ import { FetchOptions } from "ofetch";
 import { useUserStore } from "~/stores/userStore";
 
 interface IApiErrorResponse {
-    details: string;
+    detail: string;
     status: number;
     errors?: { [key: string]: string };
 }
@@ -30,7 +30,7 @@ export default async <TResponse = null>(url: string, opt: FetchOptions = {}) => 
     } catch(err: any){
         console.log(err.response)
         let error: IApiErrorResponse = {
-            details: "Coś poszło nie tak",
+            detail: "Coś poszło nie tak",
             status: 500,
         }
 
@@ -45,7 +45,7 @@ export default async <TResponse = null>(url: string, opt: FetchOptions = {}) => 
             if(!isSuccess){
                 error = {
                     status: 401,
-                    details: "Brak autoryzacji"
+                    detail: "Brak autoryzacji"
                 };
 
                 const userStore = useUserStore();

@@ -1,6 +1,7 @@
 export default defineNuxtConfig({
   modules: [
     '@pinia/nuxt',
+    'nuxt-headlessui'
   ],
   runtimeConfig:{
     public:{

@@ -17,9 +17,8 @@ const timeSince = () => {
   const date = new Date(props.date);
 
   const seconds = Math.floor((new Date().getTime() - date.getTime()) / 1000);
-  let intervalType: string;
 
-  var interval = Math.floor(seconds / 31536000);
+  let interval = Math.floor(seconds / 31536000);
   if (interval >= 5) {
     return `${interval} lat temu`;
   } else if (interval >= 2) {

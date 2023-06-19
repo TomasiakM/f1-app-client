@@ -1,4 +1,4 @@
-import { IArticleItem, IArticle } from "@/types/services/article";
+import { IArticleItem, IArticle, IArticleForm } from "@/types/services/article";
 import { IPaginatedResponse } from "@/types/commonApiResponses";
 
 const getPaginated = (page: number, pageSize: number) => {
@@ -19,4 +19,7 @@ const like = (id: string) => {
     return useApiSend<IArticle>(`api/article/${id}/like`, { method: "POST" });
 }
 
-export default { getPaginated, getAllPaginated, getBySlug, like }
+const add = (data: IArticleForm) => {
+    return useApiSend(`api/article`, { method: "POST", body: data });
+}
+export default { getPaginated, getAllPaginated, getBySlug, like, add }

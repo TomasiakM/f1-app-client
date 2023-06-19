@@ -1,3 +1,5 @@
+import { ITag } from "../tag";
+
 export interface IArticleItem{
     id: string;
     title: string;
@@ -13,8 +15,13 @@ export interface IArticle extends IArticleItem{
     tags: ITag[];
 }
 
-interface ITag {
-    id: string;
-    slug: string;
-    name: string;
+
+
+export interface IArticleForm {
+    title: string;
+    image: string;
+    description: string;
+    descriptionHtml: string;
+    publishedAt: Date | null;
+    tagIds: string[];
 }
