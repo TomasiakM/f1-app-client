@@ -49,7 +49,7 @@ const onSubmit = async () => {
       return;
     }
 
-    form.error = error.details;
+    form.error = error.detail;
 
     return;
   }

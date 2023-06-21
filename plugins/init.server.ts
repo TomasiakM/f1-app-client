@@ -2,7 +2,6 @@ import { IAuthResponse } from "@/types/services/auth";
 import { useUserStore } from "@/stores/userStore";
 
 export default defineNuxtPlugin(async () => {
-    
     const authCookie = useCookie('Refresh-Cookie');
     if(!authCookie.value){
         return;

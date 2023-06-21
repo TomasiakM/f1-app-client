@@ -25,18 +25,20 @@
 
 <script lang="ts" setup>
 import { useUserStore } from "@/stores/userStore";
+import { IComment } from "~/types/services/comment";
 
 interface IProps {
   articleId: string;
 }
 
 const props = defineProps<IProps>();
-
 const userStore = useUserStore();
 
-const api = useApi();
-
-const { data, refresh } = await api.comments.getAllByArticle(props.articleId);
+const { data, refresh } = await useAsyncData(() =>
+  useApiRead<IComment[]>(`api/comment/${props.articleId}`, {
+    method: "GET",
+  })
+);
 
 const sortedComments = computed(() => {
   if (data.value) {

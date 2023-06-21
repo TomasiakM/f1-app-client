@@ -4,7 +4,7 @@
     :disabled="isLoading"
   >
     <div class="flex gap-2 justify-center items-center">
-      <SvgLoading v-if="isLoading" />
+      <SvgLoading v-if="isLoading" class="w-5 h-5" />
       <slot />
     </div>
   </button>

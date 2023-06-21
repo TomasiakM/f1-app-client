@@ -55,6 +55,8 @@
 </template>
 
 <script lang="ts" setup>
+import { ITag } from "~/types/services/tag";
+
 interface IProps {
   modelValue: string[];
 }
@@ -62,17 +64,9 @@ interface IProps {
 const props = defineProps<IProps>();
 defineEmits(["update:modelValue"]);
 
-const api = useApi();
-
-const { data } = await api.tags.getAll();
+const { data } = await useAsyncData(() => useApiRead<ITag[]>("api/tag"));
 
 const selectedItems = ref(props.modelValue);
-
-const onEmit = (data: any) => {
-  console.log(data);
-
-  return data;
-};
 
 const getTagName = (tagId: string) => {
   return data.value?.find((e) => e.id === tagId)?.name || "undefined";

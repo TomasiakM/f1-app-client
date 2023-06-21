@@ -43,9 +43,6 @@
 
     <TagSelectMultiple v-model="form.data.tagIds" />
 
-    <pre>
-      {{ form.data }}
-    </pre>
     <AppButton type="submit" :is-loading="form.isLoading">Dodaj</AppButton>
   </form>
 </template>
@@ -90,6 +87,6 @@ const onSubmit = async () => {
   }
 
   const router = useRouter();
-  router.push("/panle/artykuly");
+  router.push("/panel/artykuly");
 };
 </script>

@@ -40,19 +40,7 @@ export default async <TResponse = null>(url: string, opt: FetchOptions = {}) => 
 
 
         if(err.response.status === 401 && !url.includes('auth/login')){
-            const { isSuccess } = await useRefreshToken();
-
-            if(!isSuccess){
-                error = {
-                    status: 401,
-                    detail: "Brak autoryzacji"
-                };
-
-                const userStore = useUserStore();
-                userStore.logout();
-
-                return { error, data: null };
-            }
+            await useRefreshToken();
 
             try{
                 const result = await myFetch<TResponse>(url, opt);

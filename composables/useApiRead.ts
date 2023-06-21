@@ -1,31 +1,28 @@
+import type { FetchRequest, FetchOptions, FetchResponse } from 'ofetch';
 import { useUserStore } from "@/stores/userStore";
 
-export default async <TResponse>(url: string ) => {
-    const { public: { baseApiUrl } } = useRuntimeConfig();
-    const { getToken } = useUserStore()
-    const res = await useFetch<TResponse>(url, {
-        baseURL: baseApiUrl,
-        retry: false,
-        headers: {
-            'Authorization': `Bearer ${getToken}`
-        },
-    });
-    
-    if(res.error.value?.statusCode === 401){
-        const { isSuccess } = await useRefreshToken();
-        
-        if(!isSuccess){
-            return res;
-        }
+ const useApiRead =async <T>(request: FetchRequest, opts: FetchOptions = {})=> {
+    const config = useRuntimeConfig()
+    const userStore = useUserStore()
 
-        return await useFetch<TResponse>(url, {
-            baseURL: baseApiUrl,
-            retry: false,
-            headers: {
-                'Authorization': `Bearer ${getToken}`
-            },
-        });
+    const myFetch = $fetch.create({
+        baseURL: config.public.baseApiUrl,
+        headers: {
+            'Authorization': `Bearer ${userStore.getToken}`
+        },
+        ...opts,
+    })
+
+    try{
+        const data = await myFetch.raw(request);
+
+        return Promise.resolve<T>(data._data as T);
+    } catch(err: any){
+        return Promise.reject(err);
     }
 
-    return res;
-}
+    //return useFetch(request, { baseURL: config.public.baseApiUrl, retry: false,
+        
+  }
+  
+  export default useApiRead;

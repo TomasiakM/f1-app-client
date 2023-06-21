@@ -28,7 +28,10 @@
       </div>
     </div>
     <CommentReplyForm
-      @replied="$emit('update-comments')"
+      @replied="
+        showReplyForm = false;
+        $emit('update-comments');
+      "
       v-if="showReplyForm && userStore.isAuthorized"
       :comment-id="comment.id"
     />

@@ -8,17 +8,29 @@
       />
       <ArticleItem v-else :article="article" />
     </div>
+    <AppPagination :page="data.page" :totalPages="data.totalPages" />
   </div>
 </template>
 
 <script lang="ts" setup>
-const api = useApi();
+import { IPaginatedResponse } from "~/types/commonApiResponses";
+import { IArticleItem } from "~/types/services/article";
+
 const route = useRoute();
+const page = ref(Number.parseInt((route.query.page || "1") as string));
 
-const { page = 1 } = route.query;
+const { data, error, refresh } = await useAsyncData(() =>
+  useApiRead<IPaginatedResponse<IArticleItem>>("api/article", {
+    method: "GET",
+    query: { page: page.value },
+  })
+);
 
-const { data, error } = await api.articles.getPaginated(
-  Number.parseInt(page as string),
-  10
+watch(
+  () => route.query.page,
+  () => {
+    page.value = Number.parseInt((route.query.page || "1") as string);
+    refresh();
+  }
 );
 </script>

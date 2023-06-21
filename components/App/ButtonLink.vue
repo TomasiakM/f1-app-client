@@ -1,7 +1,7 @@
 <template>
   <NuxtLink
     :to="to"
-    class="block rounded bg-secondary hover:bg-secondary-hover transition-colors duration-200 text-white p-1 text-center"
+    class="inline-block rounded bg-primary hover:bg-primary-hover transition-colors duration-200 text-white py-0.5 px-2 text-center"
   >
     <slot />
   </NuxtLink>
