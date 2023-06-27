@@ -4,7 +4,7 @@
       <NuxtLink :to="`/artykul/${article.slug}`">
         <img
           class="w-full h-full object-cover"
-          src="https://i.ibb.co/ySx1tsN/1837f79ca22b.jpg"
+          :src="article.image"
           :alt="article.title"
         />
       </NuxtLink>

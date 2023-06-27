@@ -3,7 +3,7 @@
     <div class="aspect-video">
       <img
         class="w-full h-full object-cover rounded"
-        src="https://i.ibb.co/ySx1tsN/1837f79ca22b.jpg"
+        :src="data.image"
         :alt="data.title"
       />
 

@@ -1,8 +1,4 @@
-import { IComment, ICommentForm, ICommentReplyForm } from "@/types/services/comment";
-
-const getAllByArticle = (articleId: string) => {
-    return useApiRead<IComment[]>(`api/comment/${articleId}`);
-}
+import { ICommentForm, ICommentReplyForm } from "@/types/services/comment";
 
 const add = (articleId: string, data: ICommentForm) => {
     return useApiSend(`api/comment/${articleId}`, {
@@ -18,4 +14,4 @@ const addReply = (commentId: string, data: ICommentReplyForm) => {
     });
 }
 
-export default { getAllByArticle, add, addReply }
+export default { add, addReply }

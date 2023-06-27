@@ -69,13 +69,31 @@ const form = reactive({
   },
 });
 
-const onSubmit = () => {
+const api = useApi();
+
+const onSubmit = async () => {
   form.isLoading = true;
   form.error = "";
+  form.validation = {
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  };
 
-  setTimeout(() => {
-    form.isLoading = false;
-  }, 2000);
-  //router.push("/logowanie?registered=true");
+  const { error } = await api.users.register(form.data);
+  form.isLoading = false;
+
+  if (error) {
+    if (error.errors) {
+      form.validation = error.errors as any;
+      return;
+    }
+
+    form.error = error.detail;
+    return;
+  }
+
+  router.push("/logowanie?registered=true");
 };
 </script>
