@@ -17,9 +17,9 @@
     <div v-else-if="data?.length === 0">
       <div class="bg-card rounded p-2 text-center">Brak komentarzy</div>
     </div>
-    <AppAlert v-else color="danger" @click="refresh"
-      >Coś poszło nie tak</AppAlert
-    >
+    <AppAlert v-else color="danger" @click="refresh">
+      Coś poszło nie tak
+    </AppAlert>
   </div>
 </template>
 
@@ -34,10 +34,8 @@ interface IProps {
 const props = defineProps<IProps>();
 const userStore = useUserStore();
 
-const { data, refresh } = await useAsyncData(() =>
-  useApiRead<IComment[]>(`api/comment/${props.articleId}`, {
-    method: "GET",
-  })
+const { data, refresh } = await useApi<IComment[]>(
+  `comment/${props.articleId}`
 );
 
 const sortedComments = computed(() => {

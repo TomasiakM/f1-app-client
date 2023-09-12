@@ -31,8 +31,7 @@ export const useUserStore = defineStore('userStore', {
         },
         async logout(){
             try{
-                const api = useApi();
-                await api.auth.logout();
+                await useApi("auth/logout", { credentials: "include"});
                 
                 this.token = "";
                 this.user = null;

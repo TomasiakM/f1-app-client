@@ -17,7 +17,7 @@ export default defineNuxtPlugin(async () => {
     
     const store = useUserStore();
     try{
-        const res = await myFetch.raw<IAuthResponse>("api/auth/refresh");
+        const res = await myFetch.raw<IAuthResponse>("auth/refresh");
         if(res._data){
             store.setUser(res._data)
             return;

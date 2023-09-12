@@ -17,19 +17,23 @@ import { IPaginatedResponse } from "~/types/commonApiResponses";
 import { IArticleItem } from "~/types/services/article";
 
 const route = useRoute();
-const page = ref(Number.parseInt((route.query.page || "1") as string));
+const page = ref((route.query.page || "1") as string);
 
-const { data, error, refresh } = await useAsyncData(() =>
-  useApiRead<IPaginatedResponse<IArticleItem>>("api/article", {
-    method: "GET",
-    query: { page: page.value },
-  })
+const { data, error, refresh } = await useApi<IPaginatedResponse<IArticleItem>>(
+  "article",
+  {},
+  { page }
 );
 
 watch(
   () => route.query.page,
   () => {
-    page.value = Number.parseInt((route.query.page || "1") as string);
+    if (route.query.page === "1") {
+      route.query.page = null;
+      return;
+    }
+
+    page.value = (route.query.page || "1") as string;
     refresh();
   }
 );

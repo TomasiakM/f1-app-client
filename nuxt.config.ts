@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   runtimeConfig:{
     public:{
       brand: "brand_name",
-      baseApiUrl: "http://localhost:5245/"
+      baseApiUrl: "http://localhost:5245/api/"
     }
   },
   devtools: { 

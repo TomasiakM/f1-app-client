@@ -36,6 +36,8 @@
 
 <script lang="ts" setup>
 import { useUserStore } from "~/stores/userStore";
+import { IAuthResponse } from "~/types/services/auth";
+
 definePageMeta({
   layout: "login-register",
 });
@@ -57,7 +59,6 @@ const form = reactive({
   },
 });
 
-const api = useApi();
 const onSubmit = async () => {
   form.isLoading = true;
   form.error = "";
@@ -67,28 +68,32 @@ const onSubmit = async () => {
     password: "",
   };
 
-  const { data, error } = await api.auth.login(form.data);
+  const { data, error } = await useApi<IAuthResponse>("auth/login", {
+    method: "POST",
+    body: form.data,
+    credentials: "include",
+  });
 
   form.isLoading = false;
 
-  if (data) {
+  if (data.value) {
     const store = useUserStore();
 
-    store.setUser(data);
+    store.setUser(data.value);
     router.push("/");
     return;
   }
 
-  if (error?.status === 401) {
+  if (error.value?.status === 401) {
     form.error = "Błędne dane logowania";
     return;
   }
 
-  if (error?.errors) {
-    form.validation = error.errors as any;
+  if (error.value?.errors) {
+    form.validation = error.value.errors as any;
   }
 
-  form.error = error?.detail || "";
+  form.error = error.value?.message || "";
 };
 
 onBeforeMount(() => {

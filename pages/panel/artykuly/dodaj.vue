@@ -48,7 +48,6 @@
 </template>
 
 <script lang="ts" setup>
-const api = useApi();
 const form = reactive({
   isLoading: false,
   error: "",
@@ -72,17 +71,19 @@ const form = reactive({
 
 const onSubmit = async () => {
   form.isLoading = true;
-  const { data, error } = await api.articles.add(form.data);
+  const { data, error } = await useApi("article", {
+    method: "POST",
+    body: form.data,
+  });
   form.isLoading = false;
 
-  if (error) {
-    if (error.errors) {
-      form.validation = error.errors as any;
-      console.log(error.errors);
+  if (error.value) {
+    if (error.value.errors) {
+      form.validation = error.value.errors as any;
       return;
     }
 
-    form.error = error.detail;
+    form.error = error.value.message;
     return;
   }
 

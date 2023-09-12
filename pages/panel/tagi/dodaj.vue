@@ -28,7 +28,6 @@ const form = reactive({
   },
 });
 
-const api = useApi();
 const router = useRouter();
 const onSubmit = async () => {
   form.isLoading = true;
@@ -37,16 +36,16 @@ const onSubmit = async () => {
     name: "",
   };
 
-  const { error } = await api.tags.add(form.data);
+  const { error } = await useApi("tag", { body: form.data, method: "POST" });
   form.isLoading = false;
 
-  if (error) {
-    if (error.errors) {
-      form.validation = error.errors as any;
+  if (error.value) {
+    if (error.value.errors) {
+      form.validation = error.value.errors as any;
       return;
     }
 
-    form.error = error.detail;
+    form.error = error.value.message;
     return;
   }
 

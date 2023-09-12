@@ -4,7 +4,13 @@
 
     <div v-if="data">
       <div class="grid gap-2">
-        <TagAdminItem v-for="tag in data.items" :key="tag.id" :tag="tag" />
+        <TagAdminItem
+          v-for="tag in data.items"
+          :key="tag.id"
+          :tag="tag"
+          @deleted="refresh"
+        />
+        <AppPagination :page="data.page" :total-pages="data.totalPages" />
       </div>
     </div>
   </div>
@@ -17,11 +23,11 @@ import { ITag } from "@/types/services/tag";
 const route = useRoute();
 
 const page = ref(Number.parseInt((route.query.page || "1") as string));
-const { data, refresh } = await useAsyncData(() =>
-  useApiRead<IPaginatedResponse<ITag>>("api/tag/admin", {
-    method: "GET",
-    query: { page: page.value, pageSize: 20 },
-  })
+
+const { data, refresh } = await useApi<IPaginatedResponse<ITag>>(
+  "tag/admin",
+  {},
+  { page, pageSize: ref(20) }
 );
 
 watch(

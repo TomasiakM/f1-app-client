@@ -69,8 +69,6 @@ const form = reactive({
   },
 });
 
-const api = useApi();
-
 const onSubmit = async () => {
   form.isLoading = true;
   form.error = "";
@@ -81,16 +79,20 @@ const onSubmit = async () => {
     confirmPassword: "",
   };
 
-  const { error } = await api.users.register(form.data);
+  const { error } = await useApi("user/register", {
+    body: form.data,
+    method: "POST",
+  });
+
   form.isLoading = false;
 
-  if (error) {
-    if (error.errors) {
-      form.validation = error.errors as any;
+  if (error.value) {
+    if (error.value.errors) {
+      form.validation = error.value.errors as any;
       return;
     }
 
-    form.error = error.detail;
+    form.error = error.value.message;
     return;
   }
 

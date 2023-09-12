@@ -50,8 +50,6 @@
 <script lang="ts" setup>
 import { IArticle } from "~/types/services/article";
 
-const api = useApi();
-
 const form = reactive({
   articleId: "",
   isLoading: false,
@@ -76,10 +74,8 @@ const form = reactive({
 
 const route = useRoute();
 
-const { data } = await useAsyncData(() =>
-  useApiRead<IArticle>(`api/article/${route.params.slug}`)
-);
-console.log(data.value);
+const { data } = await useApi<IArticle>(`article/${route.params.slug}`);
+
 if (data.value) {
   form.articleId = data.value.id;
   form.data = {
@@ -94,17 +90,20 @@ if (data.value) {
 
 const onSubmit = async () => {
   form.isLoading = true;
-  const { data, error } = await api.articles.update(form.articleId, form.data);
+  const { data, error } = await useApi(`article/${form.articleId}`, {
+    method: "PUT",
+    body: form.data,
+  });
+
   form.isLoading = false;
 
-  if (error) {
-    if (error.errors) {
-      form.validation = error.errors as any;
-      console.log(error.errors);
+  if (error.value) {
+    if (error.value.errors) {
+      form.validation = error.value.errors as any;
       return;
     }
 
-    form.error = error.detail;
+    form.error = error.value.message;
     return;
   }
 

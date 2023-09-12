@@ -50,15 +50,10 @@
 import { useUserStore } from "@/stores/userStore";
 import { IArticle } from "@/types/services/article";
 
-const api = useApi();
 const route = useRoute();
 const userStore = useUserStore();
 
-const { data, error, refresh } = await useAsyncData(() =>
-  useApiRead<IArticle>(`api/article/${route.params.slug}`, {
-    method: "GET",
-  })
-);
+const { data } = await useApi<IArticle>(`article/${route.params.slug}`);
 
 const isLiked = computed(() => {
   const userId = userStore.getUser?.id;
@@ -71,10 +66,10 @@ const isLiked = computed(() => {
 });
 
 const like = async (id: string) => {
-  const { error } = await api.articles.like(id);
+  const { error } = await useApi(`article/${id}/like`, { method: "POST" });
 
-  if (error) {
-    if (error?.status == 401) {
+  if (error.value) {
+    if (error.value?.status == 401) {
     }
 
     return;

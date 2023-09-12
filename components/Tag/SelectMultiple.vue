@@ -64,7 +64,7 @@ interface IProps {
 const props = defineProps<IProps>();
 defineEmits(["update:modelValue"]);
 
-const { data } = await useAsyncData(() => useApiRead<ITag[]>("api/tag"));
+const { data } = await useApi<ITag[]>("tag");
 
 const selectedItems = ref(props.modelValue);
 
