@@ -16,7 +16,7 @@
       <AppButtonLink :to="`/panel/artykuly/edytuj/${article.slug}`">
         Edytuj
       </AppButtonLink>
-      <button>
+      <button @click="handleDelete">
         <SvgTrash class="w-5 h-5" />
       </button>
     </div>
@@ -30,6 +30,7 @@ interface IProps {
   article: IArticleItem;
 }
 
+const emits = defineEmits(["deleted"]);
 const props = defineProps<IProps>();
 
 const isPublished = () => {
@@ -37,5 +38,15 @@ const isPublished = () => {
   const publishedAt = new Date(props.article.publishedAt);
 
   return now > publishedAt;
+};
+
+const handleDelete = async () => {
+  const { error } = await useApi(`article/${props.article.id}`, {
+    method: "DELETE",
+  });
+
+  if (!error.value) {
+    emits("deleted");
+  }
 };
 </script>

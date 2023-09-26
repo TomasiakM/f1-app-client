@@ -3,7 +3,7 @@
     <div class="flex justify-between items-center">
       <div>{{ tag.name }}</div>
 
-      <button>
+      <button @click="handleDelete">
         <SvgTrash class="w-5 h-5" />
       </button>
     </div>
@@ -17,5 +17,14 @@ interface IProps {
   tag: ITag;
 }
 
-defineProps<IProps>();
+const emits = defineEmits(["deleted"]);
+const props = defineProps<IProps>();
+
+const handleDelete = async () => {
+  const { error } = await useApi(`tag/${props.tag.id}`, { method: "DELETE" });
+
+  if (!error.value) {
+    emits("deleted");
+  }
+};
 </script>

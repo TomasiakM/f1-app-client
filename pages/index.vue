@@ -16,25 +16,12 @@
 import { IPaginatedResponse } from "~/types/commonApiResponses";
 import { IArticleItem } from "~/types/services/article";
 
-const route = useRoute();
-const page = ref((route.query.page || "1") as string);
-
+const { page } = usePage();
 const { data, error, refresh } = await useApi<IPaginatedResponse<IArticleItem>>(
   "article",
   {},
   { page }
 );
 
-watch(
-  () => route.query.page,
-  () => {
-    if (route.query.page === "1") {
-      route.query.page = null;
-      return;
-    }
-
-    page.value = (route.query.page || "1") as string;
-    refresh();
-  }
-);
+usePagination(page, refresh);
 </script>

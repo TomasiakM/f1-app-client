@@ -1,6 +1,9 @@
 <template>
   <ClientOnly>
-    <div class="text-xs text-secondary line-clamp-1" :title="useDate(date)">
+    <div
+      class="text-xs text-secondary line-clamp-1"
+      :title="useDate(date).dateWithTime"
+    >
       {{ timeSince() }}
     </div>
   </ClientOnly>

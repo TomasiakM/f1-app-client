@@ -6,16 +6,17 @@
           {{ brand }}
         </NuxtLink>
         <div class="hidden md:flex items-center gap-2">
-          <NuxtLink to="/" class="nav-link">Kalendarz</NuxtLink>
-          <NuxtLink to="/" class="nav-link">Kierowcy</NuxtLink>
-          <NuxtLink to="/" class="nav-link">Zespoły</NuxtLink>
-          <NuxtLink to="/" class="nav-link">Tory</NuxtLink>
+          <NuxtLink to="/kalendarz" class="nav-link">Kalendarz</NuxtLink>
+          <NuxtLink to="/kierowcy" class="nav-link">Kierowcy</NuxtLink>
+          <NuxtLink to="/zespoly" class="nav-link">Zespoły</NuxtLink>
+          <NuxtLink to="/tory" class="nav-link">Tory</NuxtLink>
           <NuxtLink
             v-if="userStore.user?.isAdmin"
             to="/panel"
             class="bg-primary hover:bg-primary-hover text-white duration-200 transition-colors rounded px-2"
-            >Panel</NuxtLink
           >
+            Panel
+          </NuxtLink>
 
           <div class="flex items-center pl-4 border-l border-l-gray">
             <div v-if="userStore.isAuthorized" class="flex items-center gap-1">

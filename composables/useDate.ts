@@ -15,5 +15,8 @@ export default (date: string) => {
     let minute: string | number = d.getMinutes();
     minute = minute < 10 ? '0' + minute : minute;
 
-    return `${day}.${month}.${year} ${hour}:${minute}`;
+    const date2 = `${day}.${month}.${year}`;
+    const dateWithTime = `${date} ${hour}:${minute}`
+
+    return { date: date2, dateWithTime };
 }
