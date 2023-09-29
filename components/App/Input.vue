@@ -23,7 +23,7 @@
 interface IProps {
   id: string;
   label?: string;
-  modelValue: string;
+  modelValue: string | number | null;
   error?: string | null;
 }
 

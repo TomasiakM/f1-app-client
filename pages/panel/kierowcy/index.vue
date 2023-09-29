@@ -1,16 +1,17 @@
 <template>
   <div>
-    <AppButtonLink to="/panel/artykuly/dodaj" class="mb-2">
-      Dodaj artykuł
+    <AppButtonLink to="/panel/kierowcy/dodaj" class="mb-2">
+      Dodaj kierowce
     </AppButtonLink>
 
     <div v-if="data" class="grid gap-2">
-      <ArticleAdminItem
-        v-for="article in data.items"
-        :key="article.id"
-        :article="article"
+      <DriverAdminItem
+        v-for="driver in data.items"
+        :key="driver.id"
+        :driver="driver"
         @deleted="refresh"
       />
+
       <AppPagination :page="data.page" :total-pages="data.totalPages" />
     </div>
   </div>
@@ -18,11 +19,11 @@
 
 <script lang="ts" setup>
 import { IPaginatedResponse } from "@/types/commonApiResponses";
-import { IArticleItem } from "@/types/services/article";
+import { IDriver } from "@/types/services/driver";
 
 const { page } = usePage();
-const { data, refresh } = await useApi<IPaginatedResponse<IArticleItem>>(
-  "article/admin",
+const { data, refresh } = await useApi<IPaginatedResponse<IDriver>>(
+  "driver",
   {},
   { page, pageSize: ref(20) }
 );

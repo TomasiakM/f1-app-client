@@ -71,10 +71,20 @@ const form = reactive({
 
 const onSubmit = async () => {
   form.isLoading = true;
+  form.validation = {
+    image: "",
+    title: "",
+    description: "",
+    descriptionHtml: "",
+    tagIds: "",
+    publishedAt: "",
+  };
+
   const { data, error } = await useApi("article", {
     method: "POST",
     body: form.data,
   });
+
   form.isLoading = false;
 
   if (error.value) {

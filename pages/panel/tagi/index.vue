@@ -20,21 +20,12 @@
 import { IPaginatedResponse } from "@/types/commonApiResponses";
 import { ITag } from "@/types/services/tag";
 
-const route = useRoute();
-
-const page = ref(Number.parseInt((route.query.page || "1") as string));
-
+const { page } = usePage();
 const { data, refresh } = await useApi<IPaginatedResponse<ITag>>(
   "tag/admin",
   {},
   { page, pageSize: ref(20) }
 );
 
-watch(
-  () => route.query.page,
-  () => {
-    page.value = Number.parseInt((route.query.page || "1") as string);
-    refresh();
-  }
-);
+usePagination(page, refresh);
 </script>

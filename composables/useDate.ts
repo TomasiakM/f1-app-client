@@ -16,7 +16,7 @@ export default (date: string) => {
     minute = minute < 10 ? '0' + minute : minute;
 
     const date2 = `${day}.${month}.${year}`;
-    const dateWithTime = `${date} ${hour}:${minute}`
+    const dateWithTime = `${date2} ${hour}:${minute}`
 
     return { date: date2, dateWithTime };
 }

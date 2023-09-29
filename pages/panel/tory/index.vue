@@ -1,16 +1,17 @@
 <template>
   <div>
-    <AppButtonLink to="/panel/artykuly/dodaj" class="mb-2">
-      Dodaj artykuł
+    <AppButtonLink to="/panel/tory/dodaj" class="mb-2">
+      Dodaj tor
     </AppButtonLink>
 
     <div v-if="data" class="grid gap-2">
-      <ArticleAdminItem
-        v-for="article in data.items"
-        :key="article.id"
-        :article="article"
+      <TrackAdminItem
+        v-for="track in data.items"
+        :key="track.id"
+        :track="track"
         @deleted="refresh"
       />
+
       <AppPagination :page="data.page" :total-pages="data.totalPages" />
     </div>
   </div>
@@ -18,11 +19,11 @@
 
 <script lang="ts" setup>
 import { IPaginatedResponse } from "@/types/commonApiResponses";
-import { IArticleItem } from "@/types/services/article";
+import { ITrack } from "@/types/services/track";
 
 const { page } = usePage();
-const { data, refresh } = await useApi<IPaginatedResponse<IArticleItem>>(
-  "article/admin",
+const { data, refresh } = await useApi<IPaginatedResponse<ITrack>>(
+  "track",
   {},
   { page, pageSize: ref(20) }
 );

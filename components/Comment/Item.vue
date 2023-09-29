@@ -37,6 +37,7 @@
     />
     <button
       v-else-if="userStore.isAuthorized"
+      type="button"
       @click="showReplyForm = true"
       class="text-sm font-semibold text-link"
     >
