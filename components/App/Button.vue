@@ -1,6 +1,10 @@
 <template>
   <button
-    class="p-1 rounded bg-primary hover:bg-primary-hover transition-colors duration-200 text-white"
+    class="p-1 rounded transition-colors duration-200 text-white"
+    :class="{
+      'bg-primary hover:bg-primary-hover': color === 'primary',
+      'bg-secondary hover:bg-secondary-hover': color === 'secondary',
+    }"
     :disabled="isLoading"
     @click="$emit('click')"
   >
@@ -13,6 +17,7 @@
 
 <script lang="ts" setup>
 interface IProps {
+  color?: "primary" | "secondary";
   type?: "button" | "submit" | "reset";
   isLoading?: boolean;
 }
@@ -21,6 +26,7 @@ interface IEmits {
 }
 defineEmits<IEmits>();
 withDefaults(defineProps<IProps>(), {
+  color: "primary",
   type: "button",
   isLoading: false,
 });

@@ -26,19 +26,19 @@ interface IBaseQualificationSession {
     team: ITeam;
 }
 
-export interface IFreePracticeResults extends IBaseSession { }
+export interface IFreePracticeResult extends IBaseSession { }
 
-export interface ISprintQualificationResults extends IBaseQualificationSession { }
+export interface ISprintQualificationResult extends IBaseQualificationSession { }
 
-export interface IRaceQualificationResults extends IBaseQualificationSession { }
+export interface IRaceQualificationResult extends IBaseQualificationSession { }
 
-export interface ISprintResults extends IBaseSession {
+export interface ISprintResult extends IBaseSession {
     startPosition: number;
     finishTime: string;
     points: number;
 }
 
-export interface IRaceResults extends IBaseSession {
+export interface IRaceResult extends IBaseSession {
     startPosition: number;
     finishTime: string;
     points: number;

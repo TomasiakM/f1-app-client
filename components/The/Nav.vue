@@ -6,6 +6,7 @@
           {{ brand }}
         </NuxtLink>
         <div class="hidden md:flex items-center gap-2">
+          <NuxtLink to="/klasyfikacja" class="nav-link">Klasyfikacja</NuxtLink>
           <NuxtLink to="/kalendarz" class="nav-link">Kalendarz</NuxtLink>
           <NuxtLink to="/kierowcy" class="nav-link">Kierowcy</NuxtLink>
           <NuxtLink to="/zespoly" class="nav-link">Zespoły</NuxtLink>
