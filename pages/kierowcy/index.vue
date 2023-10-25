@@ -1,13 +1,23 @@
 <template>
-  <div v-if="data" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-    <DriverItem
-      v-for="driver in data.items"
-      :key="driver.id"
-      :driver="driver"
-    />
+  <AppErrorPaginationHandler
+    :error="error"
+    :is-loading="isLoading"
+    :data="data"
+  >
+    <div v-if="data">
+      <AppError v-if="!data.items.length"> Brak wyników wyszukiwania </AppError>
 
-    <AppPagination :page="data.page" :total-pages="data.totalPages" />
-  </div>
+      <div v-else class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+        <DriverItem
+          v-for="driver in data.items"
+          :key="driver.id"
+          :driver="driver"
+        />
+
+        <AppPagination :page="data.page" :total-pages="data.totalPages" />
+      </div>
+    </div>
+  </AppErrorPaginationHandler>
 </template>
 
 <script lang="ts" setup>
@@ -16,11 +26,9 @@ import { IDriver } from "@/types/services/driver";
 
 const { page } = usePage();
 
-const { data, refresh } = await useApi<IPaginatedResponse<IDriver>>(
-  "driver",
-  {},
-  { page, pageSize: ref(20) }
-);
+const { data, error, isLoading, refresh } = await useApi<
+  IPaginatedResponse<IDriver>
+>("driver", {}, { page, pageSize: ref(20) });
 
 usePagination(page, refresh);
 </script>

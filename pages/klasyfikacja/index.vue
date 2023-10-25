@@ -1,23 +1,32 @@
 <template>
-  <div class="grid gap-2 grid-cols-1">
-    <SeasonPicker @season-change="handleChange" />
+  <AppErrorHandler
+    :error="error"
+    :is-loading="isLoading"
+    :data="classification"
+  >
+    <template #static>
+      <h3 class="text-xl font-semibold text-primary">Klasyfikacja</h3>
+      <SeasonPicker @season-change="handleChange" />
+      <h3 class="text-xl font-semibold text-primary">
+        Sezon {{ selectedSeason?.year }}
+      </h3>
+    </template>
+    <div class="grid gap-2 grid-cols-1">
+      <div class="grid gap-2 grid-cols-2">
+        <AppButton
+          :color="selectedClassification === 'driver' ? 'primary' : 'secondary'"
+          @click="selectedClassification = 'driver'"
+        >
+          Kierowcy
+        </AppButton>
+        <AppButton
+          :color="selectedClassification === 'team' ? 'primary' : 'secondary'"
+          @click="selectedClassification = 'team'"
+        >
+          Zespoły
+        </AppButton>
+      </div>
 
-    <div class="grid gap-2 grid-cols-2">
-      <AppButton
-        :color="selectedClassification === 'driver' ? 'primary' : 'secondary'"
-        @click="selectedClassification = 'driver'"
-      >
-        Kierowcy
-      </AppButton>
-      <AppButton
-        :color="selectedClassification === 'team' ? 'primary' : 'secondary'"
-        @click="selectedClassification = 'team'"
-      >
-        Drużyny
-      </AppButton>
-    </div>
-
-    <div class="">
       <div v-if="!classification.length" class="text-center font-semibold">
         Brak wyników
       </div>
@@ -44,7 +53,7 @@
         </AppTableTr>
       </AppTable>
     </div>
-  </div>
+  </AppErrorHandler>
 </template>
 
 <script lang="ts" setup>
@@ -53,6 +62,9 @@ import {
   IDriverClassification,
   ITeamClassification,
 } from "@/types/services/classification";
+
+const isLoading = ref(true);
+const error = ref(null as any);
 
 const selectedClassification = ref("driver" as "driver" | "team");
 const selectedSeason = ref(null as ISeason | null);
@@ -73,9 +85,21 @@ watch(
 
 const fetchClassification = async () => {
   if (selectedSeason.value) {
-    const { data } = await useApi<IDriverClassification[]>(
+    isLoading.value = true;
+    error.value = null;
+
+    const { data, error: fetchError } = await useApi<IDriverClassification[]>(
       `classification/${selectedSeason.value.year}/${selectedClassification.value}`
     );
+
+    isLoading.value = false;
+
+    if (fetchError.value) {
+      error.value = fetchError.value;
+      classification.value = [];
+
+      return;
+    }
 
     classification.value = data.value || [];
   }
