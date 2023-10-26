@@ -6,11 +6,13 @@
   >
     <template #static>
       <h3 class="text-xl font-semibold text-primary">Klasyfikacja</h3>
-      <SeasonPicker @season-change="handleChange" />
-      <h3 class="text-xl font-semibold text-primary">
-        Sezon {{ selectedSeason?.year }}
-      </h3>
+
+      <SeasonPicker
+        :selectedSeason="selectedSeason"
+        @season-change="handleChange"
+      />
     </template>
+
     <div class="grid gap-2 grid-cols-1">
       <div class="grid gap-2 grid-cols-2">
         <AppButton
@@ -27,31 +29,29 @@
         </AppButton>
       </div>
 
-      <div v-if="!classification.length" class="text-center font-semibold">
-        Brak wyników
-      </div>
+      <div v-if="selectedSeason">
+        <h3 class="text-xl font-semibold text-primary">
+          Sezon {{ selectedSeason.year }}
+        </h3>
 
-      <AppTable v-else>
-        <AppTableTr>
-          <AppTableTh>Pozycja</AppTableTh>
-          <AppTableTh>
-            {{ selectedClassification == "driver" ? "Kierowca" : "Zespół" }}
-          </AppTableTh>
-          <AppTableTh>Punkty</AppTableTh>
-        </AppTableTr>
-
-        <AppTableTr v-for="item in classification">
-          <AppTableTd>{{ item.place }}</AppTableTd>
-          <AppTableTd>
-            {{
+        <div class="grid grid-cols-1 gap-1">
+          <ClassificationItem
+            v-for="item in classification"
+            :key="isDriverClassification(item) ? item.driver.id : item.team.id"
+            :place="item.place"
+            :name="
               isDriverClassification(item)
-                ? item.driver.firstName + " " + item.driver.lastName
+                ? item.driver.firstName + ' ' + item.driver.lastName
                 : item.team.name
-            }}
-          </AppTableTd>
-          <AppTableTd>{{ item.points }}</AppTableTd>
-        </AppTableTr>
-      </AppTable>
+            "
+            :points="item.points"
+          />
+
+          <div v-if="!classification.length" class="text-center font-semibold">
+            Brak wyników
+          </div>
+        </div>
+      </div>
     </div>
   </AppErrorHandler>
 </template>

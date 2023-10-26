@@ -3,19 +3,15 @@
     v-if="selectedSeason"
     class="flex gap-1 overflow-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-300"
   >
-    <button
+    <AppButton
       v-for="season in sortedSeasons"
       :key="season.id"
       @click="handleChange(season)"
-      class="px-2 rounded text-white"
-      :class="
-        selectedSeason === season
-          ? 'bg-primary text-white'
-          : 'bg-secondary hover:bg-secondary-hover text-white'
-      "
+      :color="selectedSeason === season ? 'primary' : 'secondary'"
+      small
     >
       {{ season.year }}
-    </button>
+    </AppButton>
   </div>
 </template>
 

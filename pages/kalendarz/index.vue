@@ -9,7 +9,7 @@
       />
     </template>
 
-    <div v-if="selectedSeason" class="grid grid-cols-1 gap-2">
+    <div v-if="selectedSeason" class="grid grid-cols-1 gap-1">
       <h3 class="font-semibold text-primary text-lg">
         Sezon {{ selectedSeason.year }}
       </h3>
@@ -21,7 +21,9 @@
         :index="i + 1"
       />
 
-      <div v-if="!raceWeeks.length">Brak zaplanowanych wydarzeń</div>
+      <div v-if="!raceWeeks.length" class="text-center font-semibold">
+        Brak zaplanowanych wydarzeń
+      </div>
     </div>
   </AppErrorHandler>
 </template>

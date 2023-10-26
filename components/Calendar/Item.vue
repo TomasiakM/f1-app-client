@@ -12,7 +12,7 @@
         <div class="grid">
           <NuxtLink
             :to="`/kalendarz/${raceWeek.season.year}/${raceWeek.slug}`"
-            class="text-primary font-semibold text-lg"
+            class="text-primary font-semibold"
           >
             {{ raceWeek.name }}
           </NuxtLink>

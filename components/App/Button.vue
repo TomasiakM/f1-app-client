@@ -1,9 +1,11 @@
 <template>
   <button
-    class="p-1 rounded transition-colors duration-200 text-white"
+    class="rounded transition-colors duration-200 text-white"
     :class="{
       'bg-primary hover:bg-primary-hover': color === 'primary',
       'bg-secondary hover:bg-secondary-hover': color === 'secondary',
+      'px-2 py-0.5 text-sm': small,
+      'px-2 py-1 font-semibold': !small,
     }"
     :disabled="isLoading"
     @click="$emit('click')"
@@ -20,6 +22,7 @@ interface IProps {
   color?: "primary" | "secondary";
   type?: "button" | "submit" | "reset";
   isLoading?: boolean;
+  small?: boolean;
 }
 interface IEmits {
   (e: "click"): void;
@@ -29,6 +32,7 @@ withDefaults(defineProps<IProps>(), {
   color: "primary",
   type: "button",
   isLoading: false,
+  small: false,
 });
 
 defineOptions({
