@@ -1,7 +1,8 @@
 <template>
   <div v-if="data" class="grid gap-2 grid-cols-1 max-w-[100%]">
     <div class="grid grid-cols-2 gap-2">
-      <img :src="data.track.image" :alt="data.track.name" />
+      <img :src="data.track.image" :alt="data.track.name" class="rounded" />
+
       <div>
         <div class="text-xl font-semibold">
           {{ data.season.year }} - {{ data.name }}

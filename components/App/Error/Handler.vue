@@ -5,12 +5,18 @@
     <AppError v-if="error?.status === 404 && handle404">
       NIE ODNALEZIONO ZASOBU
     </AppError>
+
     <AppError v-else-if="error && error.status !== 404">
       {{ error?.message }}
     </AppError>
+
     <div v-else-if="data && isLoading">
       <slot />
-      <div class="absolute top-0 left-0 w-full h-full bg-black/40"></div>
+      <div
+        class="absolute top-0 left-0 w-full h-full min-h-20 bg-black/20 flex justify-center items-center"
+      >
+        <AppSpinner />
+      </div>
     </div>
 
     <AppSpinner v-else-if="!data && isLoading" />

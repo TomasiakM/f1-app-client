@@ -2,13 +2,18 @@
   <div class="p-2 rounded bg-card grid gap-2">
     <div class="flex justify-between gap-2">
       <div>{{ name === "Q" ? "Kwalifikacje" : "Kwalifikacje sprintu" }}</div>
-      <button v-if="session.sessionResults.length">
-        <SvgChevron
-          class="w-5 h-5"
-          :class="isOpen ? '' : 'rotate-180'"
-          @click="isOpen = !isOpen"
-        />
-      </button>
+
+      <div class="flex items-center gap-2">
+        {{ useDate(session.start).dateWithTime }}
+
+        <button v-if="session.sessionResults.length">
+          <SvgChevron
+            class="w-5 h-5"
+            :class="isOpen ? '' : 'rotate-180'"
+            @click="isOpen = !isOpen"
+          />
+        </button>
+      </div>
     </div>
     <table v-if="isOpen">
       <tr v-for="result in session.sessionResults" :key="result.place">

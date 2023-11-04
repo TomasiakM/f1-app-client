@@ -21,7 +21,7 @@
           </span>
         </div>
 
-        <div class="text-sm">{{ useRaceWeekDate(raceWeek) }}</div>
+        <div class="text-sm font-semibold">{{ useRaceWeekDate(raceWeek) }}</div>
       </div>
     </div>
   </div>
