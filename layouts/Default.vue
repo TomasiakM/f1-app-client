@@ -7,11 +7,9 @@
           <NuxtPage />
         </div>
         <div class="hidden md:block col-span-4">
-          <div class="bg-card rounded p-2">
-            <div>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-              Possimus, fuga!
-            </div>
+          <div class="grid grid-cols-1 gap-2">
+            <RaceWeekNext />
+            <RaceWeekRating />
           </div>
         </div>
       </div>

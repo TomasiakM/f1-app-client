@@ -1,5 +1,7 @@
 <template>
-  <div class="sticky top-0 left-0 w-full bg-card border-b border-b-gray p-2">
+  <div
+    class="sticky top-0 left-0 w-full bg-card border-b border-b-gray p-2 z-40"
+  >
     <div class="container mx-auto">
       <div class="flex items-center justify-between">
         <NuxtLink to="/" class="text-xl font-semibold">

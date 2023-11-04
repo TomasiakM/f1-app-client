@@ -1,5 +1,5 @@
 <template>
-  <NuxtLayout />
+  <TheLoader />
 </template>
 
 <style lang="postcss">
