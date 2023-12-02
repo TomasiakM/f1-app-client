@@ -46,7 +46,7 @@ export default async <TData>(url: FetchRequest, opt: FetchOptions = {}, params: 
         } catch(err: any) {
             if(err.response?.status === 401){
                 const { success } = await refreshToken();
-                
+
                 if(success){
                     try{
                         const myFetch2 = $fetch.create({
@@ -62,12 +62,14 @@ export default async <TData>(url: FetchRequest, opt: FetchOptions = {}, params: 
                         
                         return;
                     } catch(err: any){
-                        error.value = errorFactory(err.response?.status || 500, err.response?._data?.errors);
+                        error.value = errorFactory(err.response?.status || 500, err.response?._data.detail, err.response?._data?.errors);
+                        
+                        return;
                     }
                 }
             }
 
-            error.value = errorFactory(err.response?.status || 500, err.response?._data?.errors);
+            error.value = errorFactory(err.response?.status || 500, err.response?._data.detail, err.response?._data?.errors);
         }
         
         isLoading.value = false;
@@ -109,7 +111,7 @@ const refreshToken = async () => {
 }
 
 
-const errorFactory = (statusCode: number, errors: IFormDataError | null = null): IError => {
+const errorFactory = (statusCode: number, message: string | null, errors: IFormDataError | null = null): IError => {
     let err: IError = {
         status: 500,
         message: "Coś poszło nie tak",
@@ -121,6 +123,10 @@ const errorFactory = (statusCode: number, errors: IFormDataError | null = null):
                 err.status = 400;
                 err.message = "Błąd walidacji danych"
                 err.errors = errors;
+
+                if(!errors && message){
+                    err.message = message;
+                }
                 break;
             case 401:
                 err.status = 401;
