@@ -42,6 +42,8 @@
       :session="data.raceQualification"
     />
     <CalendarSessionRace v-if="data.race" name="Race" :session="data.race" />
+
+    <RatingSummary :race-week-id="data.id" />
   </div>
 </template>
 

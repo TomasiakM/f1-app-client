@@ -1,5 +1,8 @@
 <template>
-  <TheLoader />
+  <div>
+    <PrimeToast />
+    <TheLoader />
+  </div>
 </template>
 
 <style lang="postcss">
