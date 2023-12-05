@@ -16,11 +16,14 @@
         </div>
       </div>
     </div>
+
     <div class="bg-card rounded p-2 w-full">
       <div>
         {{ data.descriptionHtml }}
       </div>
     </div>
+
+    <DriverStatisctics :driver-id="data.id" />
   </div>
 </template>
 

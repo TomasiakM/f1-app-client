@@ -8,3 +8,11 @@ export interface IDriver {
     descriptionHtml: string;
     slug: string;
 }
+
+export interface IDriverStatistics {
+    driverId: string;
+    races: number;
+    poles: number;
+    wins: number;
+    podiums: number;
+}

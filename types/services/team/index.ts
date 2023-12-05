@@ -6,3 +6,10 @@ export interface ITeam {
     countryCode: string;
     descriptionHtml: string;
 }
+
+export interface ITeamStatistics {
+    driverId: string;
+    poles: number;
+    wins: number;
+    podiums: number;
+}

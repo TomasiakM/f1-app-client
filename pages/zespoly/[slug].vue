@@ -11,11 +11,14 @@
         <div>Kraj: {{ data.countryCode }}</div>
       </div>
     </div>
+
     <div class="bg-card rounded p-2 w-full">
       <div>
         {{ data.descriptionHtml }}
       </div>
     </div>
+
+    <TeamStatistics :team-id="data.id" />
   </div>
 </template>
 
