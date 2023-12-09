@@ -26,7 +26,8 @@
       :error="form.validation.description"
       v-model="form.data.description"
     />
-    <AppTextarea
+
+    <AppEditor
       id="description-html"
       name="description-html"
       label="Opis"

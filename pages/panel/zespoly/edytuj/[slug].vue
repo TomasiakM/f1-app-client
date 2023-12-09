@@ -28,9 +28,9 @@
       v-model="form.data.countryCode"
     />
 
-    <AppInput
-      id="description"
-      name="description"
+    <AppEditor
+      id="description-html"
+      name="description-html"
       label="Opis"
       :error="form.validation.descriptionHtml"
       v-model="form.data.descriptionHtml"
