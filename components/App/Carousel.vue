@@ -6,18 +6,15 @@
     circular
     :show-navigators="false"
     :pt="{
-      indicatorbutton: {
-        //@ts-ignore type: any
-        root: ({ context }) => ({
-          class: [
-            'w-8 h-2 transition duration-200 rounded-0',
-            {
-              'bg-gray': !context.highlighted,
-              'bg-primary': context.highlighted,
-            },
-          ],
-        }),
-      },
+      indicatorButton: ({ context }) => ({
+        class: [
+          'w-8 h-2 transition duration-200 rounded-0',
+          {
+            'bg-gray': !context.highlighted,
+            'bg-primary': context.highlighted,
+          },
+        ],
+      }),
     }"
   >
     <template #header>

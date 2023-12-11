@@ -42,7 +42,13 @@
       v-model="form.data.publishedAt"
     />
 
-    <TagSelectMultiple v-model="form.data.tagIds" />
+    <TagMultiSelect
+      id="tags"
+      label="Wybierz tagi"
+      placeholder="Wybierz tagi"
+      :error="form.validation.tagIds"
+      v-model="form.data.tagIds"
+    />
 
     <AppButton type="submit" :is-loading="form.isLoading">Dodaj</AppButton>
   </form>

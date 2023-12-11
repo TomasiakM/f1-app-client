@@ -9,7 +9,7 @@
         :drivers="drivers"
         :selected="modelValue.driverId"
         :error="errors?.driverId"
-        @change="(e) => (modelValue.driverId = e)"
+        v-model="modelValue.driverId"
       />
 
       <TeamSelect
@@ -17,7 +17,7 @@
         :teams="teams"
         :selected="modelValue.teamId"
         :error="errors?.teamId"
-        @change="(e) => (modelValue.teamId = e)"
+        v-model="modelValue.teamId"
       />
       <AppInput
         :id="name + '-' + modelValue.place + '-laps'"

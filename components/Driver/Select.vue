@@ -1,11 +1,12 @@
 <template>
   <AppSelect
     :id="id"
-    label="Wybierz kierowcę"
-    :selected="selected"
+    :selected="modelValue"
     :options="driversOptions"
     :error="error"
-    @change="(e) => emits('change', e)"
+    label="wybierz kierowcę"
+    placeholder="Wybierz kierowcę"
+    @change="handleChange"
   />
 </template>
 
@@ -14,21 +15,28 @@ import { IDriver } from "@/types/services/driver";
 
 interface IProps {
   id: string;
-  drivers: IDriver[];
-  selected: string;
+  modelValue: string;
   error?: string | null;
+  drivers: IDriver[];
 }
+
 const props = defineProps<IProps>();
 
 interface IEmits {
-  (e: "change", value: string): void;
+  (e: "update:modelValue", value: string): void;
 }
+
 const emits = defineEmits<IEmits>();
 
-const driversOptions = computed(() => {
-  return props.drivers.reduce((prev, cur) => {
-    const fullName = cur.firstName + " " + cur.lastName;
-    return { ...prev, [cur.id]: fullName };
-  }, {});
-});
+const driversOptions = computed(() =>
+  props.drivers.map((e) => {
+    const fullName = e.firstName + " " + e.lastName;
+
+    return { key: e.id, value: fullName };
+  }, [])
+);
+
+const handleChange = (e: string) => {
+  emits("update:modelValue", e);
+};
 </script>

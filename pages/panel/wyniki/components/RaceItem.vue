@@ -8,14 +8,14 @@
         :id="name + '-' + modelValue.place + '-driver'"
         :drivers="drivers"
         :selected="modelValue.driverId"
-        @change="(e) => (modelValue.driverId = e)"
+        v-model="modelValue.driverId"
       />
 
       <TeamSelect
         :id="name + '-' + modelValue.place + '-team'"
         :teams="teams"
         :selected="modelValue.teamId"
-        @change="(e) => (modelValue.teamId = e)"
+        v-model="modelValue.teamId"
       />
       <AppInput
         :id="name + '-' + modelValue.place + '-finishTime'"
