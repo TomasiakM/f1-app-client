@@ -7,8 +7,11 @@
         :alt="fullName"
       />
       <div class="flex flex-col h-full justify-center">
-        <div class="text-xl font-semibold">{{ fullName }}</div>
-        <div>Pochodzenie: {{ data.countryCode }}</div>
+        <div class="flex gap-2 text-xl font-semibold">
+          <AppFlag :code="data.countryCode" />
+          <div>{{ fullName }}</div>
+        </div>
+
         <div>
           Wiek: {{ getAge(data.dateOfBirth) }} lat ({{
             useDate(data.dateOfBirth).date

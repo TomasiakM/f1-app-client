@@ -7,7 +7,10 @@
         <div class="text-xl font-semibold">
           {{ data.season.year }} - {{ data.name }}
         </div>
-        <div>{{ data.track.countryCode }} {{ data.track.name }}</div>
+        <div class="flex items-center gap-2">
+          <AppFlag :code="data.track.countryCode" />
+          <div>{{ data.track.name }}</div>
+        </div>
       </div>
     </div>
 

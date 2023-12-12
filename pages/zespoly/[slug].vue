@@ -7,8 +7,10 @@
         :alt="data.name"
       />
       <div class="flex flex-col h-full justify-center">
-        <div class="text-xl font-semibold">{{ data.name }}</div>
-        <div>Kraj: {{ data.countryCode }}</div>
+        <div class="flex gap-2 text-xl font-semibold">
+          <AppFlag :code="data.countryCode" />
+          <div>{{ data.name }}</div>
+        </div>
       </div>
     </div>
 
