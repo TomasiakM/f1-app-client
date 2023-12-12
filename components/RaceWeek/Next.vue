@@ -1,21 +1,23 @@
 <template>
   <div class="bg-card rounded p-2">
-    <div v-if="data">
+    <div v-if="data && nextSession">
       <NuxtLink
         :to="`/kalendarz/${data.season.year}/${data.slug}`"
-        class="text-center text-2xl font-semibold"
+        class="text-primary text-center text-xl font-semibold"
       >
         <div>{{ data.name }}</div>
       </NuxtLink>
 
-      <div v-if="nextSession" class="text-center text-xs font-semibold">
+      <div class="text-center text-xs font-semibold">
         ({{ nextSession.name }})
       </div>
 
       <AppTimer :date="nextSession?.date || null" />
     </div>
 
-    <div v-else class="text-sm font-semibold">Brak kolejnych zawodów</div>
+    <div v-else class="text-center text-sm font-semibold">
+      Brak kolejnych zawodów
+    </div>
   </div>
 </template>
 

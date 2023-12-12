@@ -19,6 +19,7 @@
         :error="errors?.teamId"
         v-model="modelValue.teamId"
       />
+
       <AppInput
         :id="name + '-' + modelValue.place + '-laps'"
         name="laps"
@@ -27,6 +28,7 @@
         :error="errors?.laps"
         v-model="modelValue.laps"
       />
+
       <AppInput
         :id="name + '-' + modelValue.place + '-fastestLap'"
         name="fastestLap"

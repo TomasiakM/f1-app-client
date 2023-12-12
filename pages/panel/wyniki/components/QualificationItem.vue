@@ -19,6 +19,7 @@
         :error="errors?.teamId"
         v-model="modelValue.teamId"
       />
+
       <AppInput
         :id="name + '-' + modelValue.place + '-q1-time'"
         name="q1"
@@ -27,6 +28,7 @@
         :error="errors?.q1Time"
         v-model="modelValue.q1Time"
       />
+
       <AppInput
         :id="name + '-' + modelValue.place + '-q2-time'"
         name="q2"
@@ -35,6 +37,7 @@
         :error="errors?.q2Time"
         v-model="modelValue.q2Time"
       />
+
       <AppInput
         :id="name + '-' + modelValue.place + '-q3-time'"
         name="q3"
@@ -44,6 +47,7 @@
         v-model="modelValue.q3Time"
       />
     </div>
+
     <button @click="emits('delete-result', modelValue.place)">
       <SvgTrash class="w-5 h-5" />
     </button>

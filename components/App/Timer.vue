@@ -1,27 +1,24 @@
 <template>
   <div v-if="timerData.show" class="text-center text-3xl font-semibold my-2">
-    <div class="flex justify-center content-center gap-2">
+    <div class="flex justify-center content-center gap-4">
       <div class="relative w-[34px]">
         <div>{{ timerData.days }}</div>
         <div class="absolute -bottom-2 w-full text-xs flex justify-center">
           dni
         </div>
       </div>
-      <div>:</div>
       <div class="relative w-[34px]">
         <div>{{ timerData.hours }}</div>
         <div class="absolute -bottom-2 w-full text-xs flex justify-center">
           godzin
         </div>
       </div>
-      <div>:</div>
       <div class="relative w-[34px]">
         <div>{{ timerData.minutes }}</div>
         <div class="absolute -bottom-2 w-full text-xs flex justify-center">
           minut
         </div>
       </div>
-      <div>:</div>
       <div class="relative w-[34px]">
         <div>{{ timerData.seconds }}</div>
         <div class="absolute -bottom-2 w-full text-xs flex justify-center">

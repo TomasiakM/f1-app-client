@@ -30,7 +30,7 @@
       </div>
 
       <div v-if="selectedSeason">
-        <h3 class="text-xl font-semibold text-primary">
+        <h3 class="text-lg font-semibold text-primary">
           Sezon {{ selectedSeason.year }}
         </h3>
 

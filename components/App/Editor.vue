@@ -6,7 +6,8 @@
 
     <ClientOnly>
       <Editor
-        editorStyle="height: 320px"
+        :id="id"
+        editorStyle="height: 420px"
         :pt="{
           toolbar: {
             class: ['bg-zinc-100 rounded-t !border-none '],
@@ -22,8 +23,6 @@
         @text-change="(e) => $emit('update:modelValue', e.htmlValue)"
       />
     </ClientOnly>
-
-    <span>{{ modelValue.length }}</span>
 
     <span v-if="error" class="text-sm font-semibold text-danger">
       {{ error }}
@@ -49,3 +48,9 @@ interface IEmits {
 const props = defineProps<IProps>();
 const emits = defineEmits<IEmits>();
 </script>
+
+<style lang="postcss" scoped>
+:deep(.ql-editor) {
+  @apply h-full;
+}
+</style>
