@@ -9,6 +9,7 @@
       :model-value="selected"
       :placeholder="placeholder"
       :options="options"
+      :virtualScrollerOptions="itemSize ? { itemSize } : undefined"
       :pt="{
         root: { class: ['w-full border border-gray rounded bg-white'] },
         input: { class: ['p-1'] },
@@ -22,7 +23,7 @@
       @change="(e) => handleChange(e.value.key)"
     >
       <template #value="data">
-        <slot name="default">
+        <slot name="default" :props="data">
           <div v-if="data.value" class="flex align-items-center">
             <div>{{ selectedOptionName }}</div>
           </div>
@@ -31,9 +32,8 @@
           </span>
         </slot>
       </template>
-
       <template #option="option">
-        <slot name="default">
+        <slot name="option" :props="option">
           {{ option.option.value }}
         </slot>
       </template>
@@ -53,7 +53,9 @@ interface IProps {
   placeholder: string;
   selected: string;
   options: { key: string; value: string }[];
+  itemSize?: number;
 }
+
 const props = defineProps<IProps>();
 
 interface IEmits {

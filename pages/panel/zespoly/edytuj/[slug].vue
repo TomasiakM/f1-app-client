@@ -20,10 +20,8 @@
       v-model="form.data.image"
     />
 
-    <AppInput
+    <CountrySelect
       id="countryCode"
-      name="countryCode"
-      label="Kod iso kraju"
       :error="form.validation.countryCode"
       v-model="form.data.countryCode"
     />
