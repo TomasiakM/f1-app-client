@@ -21,7 +21,7 @@
         <div class="text-xl font-semibold">
           {{ raceWeek.season.year }} {{ raceWeek.name }}
         </div>
-        <AppButton @click="openRating">Otwórz ocenianie</AppButton>
+        <RaceWeekRatingController :race-week-id="raceWeek.id" />
       </div>
       <div class="grid gap-2">
         <FreePracticeList
@@ -97,8 +97,6 @@ import FreePracticeList from "./components/FreePracticeList.vue";
 import QualificationList from "./components/QualificationList.vue";
 import RaceList from "./components/RaceList.vue";
 
-const toast = useAppToast();
-
 const selectedSeason = ref(null as ISeason | null);
 const selectedRaceWeek = ref(null as IRaceWeek | null);
 const raceWeekList = ref([] as IRaceWeek[]);
@@ -151,29 +149,6 @@ const fetchRaceWeek = async () => {
 
   if (data.value) {
     raceWeek.value = data.value;
-  }
-};
-
-const openRating = async () => {
-  if (!raceWeek.value) return;
-
-  const { error } = await useApi(`rating/${raceWeek.value.id}`, {
-    method: "POST",
-  });
-
-  if (error.value) {
-    if (error.value.status === 400) {
-      toast.error(error.value.message);
-      return;
-    }
-
-    if (error.value.status === 404) {
-      toast.error("Nie można utworzyć oceniania dla tego wydarzenia");
-      return;
-    }
-
-    toast.error();
-    return;
   }
 };
 </script>
