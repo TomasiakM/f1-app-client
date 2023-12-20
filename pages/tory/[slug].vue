@@ -18,6 +18,8 @@
         {{ data.descriptionHtml }}
       </div>
     </div>
+
+    <TrackRaceWeekList :track-id="data.id" />
   </div>
 </template>
 
