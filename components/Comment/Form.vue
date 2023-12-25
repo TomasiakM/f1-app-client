@@ -22,6 +22,8 @@ interface IProps {
 const props = defineProps<IProps>();
 const emits = defineEmits(["comment-added"]);
 
+const toast = useAppToast();
+
 const form = reactive({
   isLoading: false,
   error: "",
@@ -56,6 +58,8 @@ const onSubmit = async () => {
     form.error = error.value.message;
     return;
   }
+
+  toast.success("Pomyślnie dodano komentarz");
 
   form.data = {
     text: "",

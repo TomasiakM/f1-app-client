@@ -21,6 +21,8 @@ interface IProps {
 const props = defineProps<IProps>();
 const emits = defineEmits(["replied"]);
 
+const toast = useAppToast();
+
 const form = reactive({
   isLoading: false,
   error: "",
@@ -56,6 +58,8 @@ const onSubmit = async () => {
 
     return;
   }
+
+  toast.success("Pomyślnie dodano odpowiedź do komentarza");
 
   form.data = {
     text: "",

@@ -56,6 +56,8 @@ import { IArticle } from "@/types/services/article";
 const route = useRoute();
 const userStore = useUserStore();
 
+const toast = useAppToast();
+
 const { data, error, isLoading } = await useApi<IArticle>(
   `article/${route.params.slug}`
 );
@@ -84,5 +86,7 @@ const like = async (id: string) => {
   if (userId) {
     data.value?.likes.push(userId);
   }
+
+  toast.success("Pomyślnie polubiono artykuł");
 };
 </script>

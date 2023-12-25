@@ -17,8 +17,7 @@
 <script lang="ts" setup>
 import { IRating } from "@/types/services/rating";
 
-const appToast = useAppToast();
-const router = useRouter();
+const toast = useAppToast();
 
 const form = reactive({
   data: {} as { [key: string]: number },
@@ -60,14 +59,14 @@ const handleSubmit = async () => {
     }
 
     if (res.error.value.status === 400) {
-      appToast.error(res.error.value.message);
+      toast.error(res.error.value.message);
       return;
     }
 
-    appToast.error();
+    toast.error();
     return;
   }
 
-  router.push("/");
+  toast.success("Pomyślnie oddano oceny");
 };
 </script>
