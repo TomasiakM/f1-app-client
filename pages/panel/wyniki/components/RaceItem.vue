@@ -65,15 +65,15 @@
         v-model="modelValue.startPosition"
       />
 
-      <AppInput
+      <ResultFinishTypeSelect
         :id="name + '-' + modelValue.place + '-finishType'"
-        name="startPosition"
-        placeholder="Finished | DSQ | DNF | DNS"
         label="Typ zakończenia wyścigu"
         :error="errors?.finishType"
+        placeholder="Wybierz typ zakończenia wyścigu"
         v-model="modelValue.finishType"
       />
     </div>
+
     <button @click="emits('delete-result', modelValue.place)">
       <SvgTrash class="w-5 h-5" />
     </button>
