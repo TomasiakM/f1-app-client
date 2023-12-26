@@ -6,10 +6,16 @@
         :src="data.image"
         :alt="data.name"
       />
-      <div class="flex flex-col h-full justify-center">
-        <div class="flex gap-2 text-xl font-semibold">
-          <AppFlag :code="data.countryCode" />
-          <div>{{ data.name }}</div>
+      <div class="flex h-full items-center">
+        <div class="grid grid-cols-1 gap-1">
+          <div class="flex gap-2 text-xl font-semibold">
+            <AppFlag :code="data.countryCode" />
+            <div>{{ data.name }}, {{ data.city }}</div>
+          </div>
+          <div class="font-semibold text-sm">
+            <div>Długość: {{ data.length }}m</div>
+            <div>Zakręty: {{ data.corners }}</div>
+          </div>
         </div>
       </div>
     </div>

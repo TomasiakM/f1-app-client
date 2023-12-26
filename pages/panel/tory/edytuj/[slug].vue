@@ -20,10 +20,34 @@
       v-model="form.data.image"
     />
 
+    <AppInput
+      id="length"
+      name="length"
+      label="Długość (m)"
+      :error="form.validation.length"
+      v-model="form.data.length"
+    />
+
+    <AppInput
+      id="corners"
+      name="corners"
+      label="Ilość zakrętów"
+      :error="form.validation.corners"
+      v-model="form.data.corners"
+    />
+
     <CountrySelect
       id="countryCode"
       :error="form.validation.countryCode"
       v-model="form.data.countryCode"
+    />
+
+    <AppInput
+      id="city"
+      name="city"
+      label="Miasto"
+      :error="form.validation.city"
+      v-model="form.data.city"
     />
 
     <AppEditor
@@ -53,12 +77,18 @@ const form = reactive({
     image: "",
     countryCode: "",
     descriptionHtml: "",
+    length: 0,
+    corners: 0,
+    city: "",
   },
   validation: {
     name: "",
     image: "",
     countryCode: "",
     descriptionHtml: "",
+    length: "",
+    corners: "",
+    city: "",
   },
 });
 
@@ -71,6 +101,9 @@ if (data.value) {
     image: data.value.image,
     countryCode: data.value.countryCode,
     descriptionHtml: data.value.descriptionHtml,
+    length: data.value.length,
+    corners: data.value.corners,
+    city: data.value.city,
   };
 }
 
@@ -82,6 +115,9 @@ const onSubmit = async () => {
     image: "",
     countryCode: "",
     descriptionHtml: "",
+    length: "",
+    corners: "",
+    city: "",
   };
 
   const { error } = await useApi(`track/${form.trackId}`, {
