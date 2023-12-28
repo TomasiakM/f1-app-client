@@ -11,7 +11,7 @@
         <div class="flex flex-wrap gap-1">
           <div v-for="tag in data.tags" :key="tag.id">
             <NuxtLink
-              :to="`/`"
+              :to="`/tag/${tag.slug}`"
               class="bg-primary hover:bg-primary-hover transition-colors duration-200 rounded px-1 py-0.5 text-white text-sm"
             >
               {{ tag.name }}
