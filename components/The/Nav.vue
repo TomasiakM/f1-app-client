@@ -34,9 +34,9 @@
                 v-if="userStore.isAuthorized"
                 class="flex items-center gap-1"
               >
-                <div class="font-semibold">
+                <NuxtLink to="/ustawienia/haslo" class="font-semibold">
                   {{ userStore.getUser?.username }}
-                </div>
+                </NuxtLink>
 
                 <button @click="userStore.logout()">
                   <SvgLogout class="w-5 h-5" />
