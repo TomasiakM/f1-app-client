@@ -1,15 +1,21 @@
 <template>
   <div class="grid gap-2 bg-card rounded p-2">
-    <div class="flex items-center gap-2">
-      <img
-        class="w-10 h-10 rounded-full object-cover"
-        :src="`https://i.ibb.co/vqRYnk7/2c51ead87ebe.png`"
-        :alt="comment.createdBy.username"
-      />
-      <div class="grid">
-        <div>{{ comment.createdBy.username }}</div>
-        <AppDisplayDate :date="comment.createdAt" />
+    <div class="flex items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <img
+          class="w-10 h-10 rounded-full object-cover"
+          :src="`https://i.ibb.co/vqRYnk7/2c51ead87ebe.png`"
+          :alt="comment.createdBy.username"
+        />
+        <div>
+          <div>{{ comment.createdBy.username }}</div>
+          <AppDisplayDate :date="comment.createdAt" />
+        </div>
       </div>
+      <CommentAdminAction
+        :user-id="comment.createdBy.id"
+        :comment-id="comment.id"
+      />
     </div>
     <div>
       {{ comment.text }}
@@ -24,6 +30,7 @@
           v-for="reply in sortedReplies"
           :key="reply.id"
           :reply="reply"
+          :comment-id="comment.id"
         />
       </div>
     </div>

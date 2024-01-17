@@ -8,7 +8,7 @@
       'px-2 py-1 font-semibold': !small,
     }"
     :disabled="isLoading"
-    @click="$emit('click')"
+    @click="(e) => $emit('click', e)"
   >
     <div class="flex gap-2 justify-center items-center">
       <SvgLoading v-if="isLoading" class="w-5 h-5" />
@@ -25,9 +25,10 @@ interface IProps {
   small?: boolean;
 }
 interface IEmits {
-  (e: "click"): void;
+  (e: "click", event: Event): void;
 }
-defineEmits<IEmits>();
+
+const emits = defineEmits<IEmits>();
 withDefaults(defineProps<IProps>(), {
   color: "primary",
   type: "button",
