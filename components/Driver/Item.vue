@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink :to="`/kierowcy/${driver.slug}`" class="bg-card p-2 rouunded block">
+  <NuxtLink :to="`/kierowcy/${driver.slug}`" class="bg-card p-2 rounded block">
     <img
       class="rounded-full w-[75%] aspect-square mx-auto object-cover"
       :src="driver.image"

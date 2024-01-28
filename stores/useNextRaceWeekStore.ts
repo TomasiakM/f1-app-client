@@ -124,8 +124,8 @@ export const useNextRaceWeekStore = defineStore("nextRaceWeekStore", {
 
         const now = new Date();
         let nextUpdate = sortedSessions[0].date.getTime() - now.getTime();
-        console.log(nextUpdate);
         if (nextUpdate > 0) {
+          if (nextUpdate > 100000) nextUpdate = 100000;
           useTimeoutFn(() => {
             this.setNextSession();
           }, nextUpdate);

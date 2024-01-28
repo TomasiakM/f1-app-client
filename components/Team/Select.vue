@@ -4,7 +4,7 @@
     :selected="modelValue"
     :options="teamOptions"
     :error="error"
-    label="wybierz zespół"
+    label="Wybierz zespół"
     placeholder="Wybierz zespół"
     @change="handleChange"
   />

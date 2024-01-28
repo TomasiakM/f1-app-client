@@ -2,7 +2,7 @@
   <CountryFlag
     :country="code"
     :size="size"
-    class="rounded"
+    class="rounded shadow"
     :class="{ '!-mt-1 !-mr-3.5': size === 'normal' }"
   />
 </template>

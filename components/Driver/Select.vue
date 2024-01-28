@@ -4,7 +4,7 @@
     :selected="modelValue"
     :options="driversOptions"
     :error="error"
-    label="wybierz kierowcę"
+    label="Wybierz kierowcę"
     placeholder="Wybierz kierowcę"
     @change="handleChange"
   />

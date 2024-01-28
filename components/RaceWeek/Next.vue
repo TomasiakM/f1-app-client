@@ -19,9 +19,6 @@
         ({{ nextRaceWeekStore.getNextSession.name }})
       </div>
 
-      <pre>
-        {{ nextRaceWeekStore.getNextSession }}
-      </pre>
       <AppTimer :date="nextRaceWeekStore.getNextSession?.date || null" />
     </div>
 

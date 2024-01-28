@@ -89,6 +89,11 @@ const onSubmit = async () => {
     return;
   }
 
+  if (error.value?.status === 403) {
+    form.error = "Twoje konto zostało zablokowane";
+    return;
+  }
+
   if (error.value?.errors) {
     form.validation = error.value.errors as any;
   }

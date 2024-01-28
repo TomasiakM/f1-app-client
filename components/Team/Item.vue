@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink :to="`/zespoly/${team.slug}`" class="bg-card p-2 rouunded block">
+  <NuxtLink :to="`/zespoly/${team.slug}`" class="bg-card p-2 rounded block">
     <img
       class="rounded-full w-[75%] aspect-square mx-auto object-cover"
       :src="team.image"
