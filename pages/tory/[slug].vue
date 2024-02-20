@@ -19,10 +19,8 @@
         </div>
       </div>
     </div>
-    <div class="bg-card rounded p-2 w-full">
-      <div>
-        {{ data.descriptionHtml }}
-      </div>
+    <div class="bg-card rounded p-2 lg:p-4 w-full">
+      <div v-html="data.descriptionHtml" />
     </div>
 
     <TrackRaceWeekList :track-id="data.id" />
